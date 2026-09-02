@@ -84,7 +84,8 @@
   .gauge{height:12px;background:rgba(251,241,207,.12);border-radius:6px;margin-top:14px;position:relative;overflow:hidden}
   .gauge i{position:absolute;top:0;bottom:0;left:25%;width:2px;background:rgba(251,241,207,.7);z-index:1}
   .gauge b{position:absolute;top:0;bottom:0;border-radius:6px;background:var(--gold);transition:width .6s}
-  .gauge b.up{background:var(--up)} .gauge b.down{background:var(--down)}
+  .gauge b.up{background:var(--up);animation:pulse 1.6s ease-in-out infinite} .gauge b.down{background:var(--down)}
+  @keyframes pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.35)}}
   .gauge-scale{display:flex;justify-content:space-between;font-family:"Courier Prime",monospace;font-size:11px;color:rgba(251,241,207,.6);margin-top:4px;letter-spacing:.08em}
   .netnote{font-family:"Courier Prime",monospace;font-size:12.5px;color:rgba(251,241,207,.65);margin:16px 0 0;line-height:1.6}
 
@@ -138,7 +139,7 @@
     .tiles,.charts{grid-template-columns:1fr}
     .chart .plot,.chart .empty{height:260px}
   }
-  @media (prefers-reduced-motion:reduce){.hero img{transition:none}.gauge b{transition:none}.cloud{animation:none;left:auto}.c1{right:10%}.c2{right:60%}.c3{right:30%}.c4{right:75%}.c5{right:15%}.c6{right:45%}}
+  @media (prefers-reduced-motion:reduce){.hero img{transition:none}.gauge b{transition:none;animation:none}.cloud{animation:none;left:auto}.c1{right:10%}.c2{right:60%}.c3{right:30%}.c4{right:75%}.c5{right:15%}.c6{right:45%}}
 </style>
 
 </head>
@@ -300,6 +301,7 @@ var CONFIG = {
       secsub:function(d){return "That's "+d.days+" day"+(d.days===1?"":"s")+", "+d.h+" h, "+d.m+" min of Elon having time to think about it.";},
       base:function(c){return "Now $"+c.now+" · needs +"+c.need+"% to reach the $"+c.high+" peak of Jun 16, 2026.";},
       basewait:"Peak: $225.64 on Jun 16, 2026. Low: $104.83 on Aug 3, 2026.",
+      above:function(c){return "Now $"+c.now+" · +"+c.over+"% ABOVE the $"+c.high+" peak. New all-time-high territory. Elon, the garage door is open.";},
       offline:"Signal lost. Elon's data doesn't reach this couch right now.",
       noalf:"Chart pending. Like everything else in my life.",
       noalf_small:"It appears here as soon as the pair address is added to CONFIG.",
@@ -313,6 +315,7 @@ var CONFIG = {
       secsub:function(d){return "Son "+d.days+" día"+(d.days===1?"":"s")+", "+d.h+" h y "+d.m+" min que Elon lleva teniendo tiempo para pensarlo.";},
       base:function(c){return "Ahora $"+c.now+" · necesita +"+c.need+"% para volver al máximo de $"+c.high+" del 16 de junio de 2026.";},
       basewait:"Máximo: $225,64 el 16 de junio de 2026. Mínimo: $104,83 el 3 de agosto de 2026.",
+      above:function(c){return "Ahora $"+c.now+" · +"+c.over+"% POR ENCIMA del máximo de $"+c.high+". Territorio de nuevo récord. Elon, la puerta del garaje está abierta.";},
       offline:"Señal perdida. Los datos de Elon no llegan a este sillón ahora mismo.",
       noalf:"Gráfico pendiente. Como todo en mi vida.",
       noalf_small:"Aparece acá apenas se agregue la dirección del par en CONFIG.",
@@ -362,9 +365,10 @@ var CONFIG = {
     var pct=(spcxNow/H-1)*100, need=((H/spcxNow-1)*100);
     el.textContent=(pct>=0?'+':'')+pct.toFixed(2)+'%';
     el.className='big '+(pct>=0?'up':'down');
-    sub.textContent=DYN[lang].base({now:spcxNow.toFixed(2),need:Math.max(0,need).toFixed(1),high:H.toFixed(2)});
+    sub.textContent=pct>=0?DYN[lang].above({now:spcxNow.toFixed(2),over:pct.toFixed(2),high:H.toFixed(2)}):DYN[lang].base({now:spcxNow.toFixed(2),need:need.toFixed(1),high:H.toFixed(2)});
     var prog=Math.max(0,Math.min(100,(spcxNow-L)/(H-L)*100));
     bar.className=pct>=0?'up':(prog<35?'down':''); bar.style.left='0'; bar.style.width=prog+'%';
+    document.getElementById('g_high').textContent=pct>=0?('$'+H.toFixed(2)+' ✓ · $'+spcxNow.toFixed(2)):('$'+H.toFixed(2));
     var list=DYN[lang].mood, txt=list[list.length-1][1];
     for(var i=0;i<list.length;i++){ if(pct<list[i][0]){txt=list[i][1];break;} }
     mood.textContent=txt;
