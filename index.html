@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="ALF4EVER ($ALF) — a meme token on Robinhood Chain created to cheer up Elon so he builds ALF a spaceship.">
+<meta name="description" content="ALF4EVER ($ALF): SpaceX went public, hit $225 and lost half. Sad Elon builds no ships. ALF needs a ship. So he made a token.">
 <title>ALF4EVER</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Nunito:ital,wght@0,400;0,700;0,900;1,400&family=Courier+Prime:wght@400;700&display=swap">
@@ -80,8 +80,8 @@
   .tile .sub{font-family:"Courier Prime",monospace;font-size:13px;color:rgba(251,241,207,.75);margin:8px 0 0;line-height:1.5}
   .tile .status{margin:12px 0 0;font-weight:700;font-size:16px;line-height:1.35}
   .gauge{height:12px;background:rgba(251,241,207,.12);border-radius:6px;margin-top:14px;position:relative;overflow:hidden}
-  .gauge i{position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(251,241,207,.5)}
-  .gauge b{position:absolute;top:0;bottom:0;border-radius:6px;background:var(--gold);transition:left .6s,width .6s}
+  .gauge i{position:absolute;top:0;bottom:0;left:25%;width:2px;background:rgba(251,241,207,.7);z-index:1}
+  .gauge b{position:absolute;top:0;bottom:0;border-radius:6px;background:var(--gold);transition:width .6s}
   .gauge b.up{background:var(--up)} .gauge b.down{background:var(--down)}
   .gauge-scale{display:flex;justify-content:space-between;font-family:"Courier Prime",monospace;font-size:11px;color:rgba(251,241,207,.6);margin-top:4px;letter-spacing:.08em}
   .netnote{font-family:"Courier Prime",monospace;font-size:12.5px;color:rgba(251,241,207,.65);margin:16px 0 0;line-height:1.6}
@@ -147,7 +147,7 @@
     <img src="alf.png" alt="ALF4EVER coin: ALF winking with a rose, stamped MELMAC, ALF4EVER, THE MELMACIAN, ALF COIN – UTILITY TOKEN, with the Robinhood Chain logo at the bottom">
     <div>
       <h1 lang="en">ALF4EVER<small data-i18n="sub">The Melmacian · $ALF</small></h1>
-      <p class="tag" data-i18n="tag">The first token created to cheer up a billionaire so he builds an alien a spaceship. Yes, that's the whole plan.</p>
+      <p class="tag" data-i18n="tag">SpaceX went public, hit $225, then lost half. Elon is sad. Sad Elon builds no ships. I need a ship. So I made a token. Yes, that's the whole plan.</p>
       <dl class="specs">
         <dt data-i18n="k_name">Name</dt><dd>ALF4EVER</dd>
         <dt data-i18n="k_ticker">Ticker</dt><dd>ALF</dd>
@@ -169,11 +169,11 @@
         <p class="status" data-i18n="t1_status">Every one of these seconds, Elon has had the chance to feel a little better. He hasn't called yet.</p>
       </div>
       <div class="tile">
-        <p class="lbl" data-i18n="t2_lbl">Elon Recovery Meter · SPCX since $ALF launch</p>
+        <p class="lbl" data-i18n="t2_lbl">Elon Recovery Meter · SPCX vs its all-time high</p>
         <p class="big" id="pct">…</p>
         <p class="sub" id="pct_sub">—</p>
-        <div class="gauge" aria-hidden="true"><i></i><b id="bar" style="left:50%;width:0"></b></div>
-        <div class="gauge-scale"><span>−50%</span><span>0%</span><span>+50%</span></div>
+        <div class="gauge" aria-hidden="true"><i id="ipo_mark"></i><b id="bar" style="left:0;width:0"></b></div>
+        <div class="gauge-scale"><span id="g_low">$104.83</span><span id="g_ipo">IPO $135</span><span id="g_high">$225.64</span></div>
         <p class="status" id="mood">—</p>
       </div>
     </div>
@@ -198,9 +198,9 @@
     <p data-i18n="p2">There's a token floating around. Just look at that big shiny thing up there with my face on it. Yeah, it's got that little Robinhood Chain logo at the bottom. Very pretty, very shiny. <strong>"MELMAC"</strong> is my home planet, obviously. <strong>"ALF4EVER"</strong> because I'm a timeless classic. <strong>"THE MELMACIAN"</strong> is yours truly. And <strong>"UTILITY TOKEN"</strong>? Oh, this one actually has a utility. Keep reading.</p>
 
     <h2 data-i18n="h2">Why This Token Exists (The Real Story)</h2>
-    <p data-i18n="p3">Here's what happened. SpaceX landed on Robinhood Chain as a token, and the landing went about as smoothly as mine into the Tanners' garage. It went up, it came down, people cried. Elon is sad. And a sad Elon builds no spaceships.</p>
-    <p data-i18n="p4">Now, why do I care? Because I need a spaceship. Melmac exploded—long story, involves hair dryers—and I've been sleeping on a couch since 1986. Elon is the only guy on this planet who builds rockets on a regular basis. So I made him a deal. He doesn't know about it, but I made it.</p>
-    <p data-i18n="p5">The deal: <em>$ALF exists to help Elon feel better.</em> Every second this token is alive, SpaceX has one more second to recover what it lost. The day SpaceX gets back to where it was when I launched this thing, Elon (in my head) owes me a brand-new ship. Meter's up there. You can watch it. I do, between naps.</p>
+    <p data-i18n="p3">Here's what happened. On June 12, 2026, SpaceX went public. Biggest IPO in the history of your planet. $135 a share. Day one it closed at $160. Four days later it touched <strong>$225.64</strong>. Champagne, confetti, Elon dancing. Then gravity, which I understand better than anyone, did its thing: by August 3 it was <strong>$104.83</strong>. Half the rocket, gone. That landing was worse than mine into the Tanners' garage, and I hit the garage <em>with the ship</em>.</p>
+    <p data-i18n="p4">Now, Elon is sad. A sad Elon builds no spaceships. And why do I care? Because I need a spaceship. Melmac exploded—long story, involves hair dryers—and I've been sleeping on a couch since 1986. Elon is the only guy on this planet who builds rockets on a regular basis. So I made him a deal. He doesn't know about it, but I made it.</p>
+    <p data-i18n="p5">The deal: <em>$ALF exists to help Elon feel better.</em> Every second this token is alive, SpaceX has one more second to climb back. The day SPCX returns to <strong>$225.64</strong>, its all-time high, Elon (in my head) owes me a brand-new ship. Meter's up there: it shows how far the rocket still is from the top, live. You can watch it. I do, between naps.</p>
     <p data-i18n="p6">Am I trying to sell it to you? Nah, relax. I don't sell anything; I barely get off the couch to raid the fridge. I'm just bringing it up because it exists, because a man needs a ride home, and because, well, I already explained the cable TV situation.</p>
 
     <h2 data-i18n="h3">The Game Plan (Or Lack Thereof)</h2>
@@ -234,14 +234,18 @@
    launchISO      : the exact moment $ALF was launched (with timezone)
    alfPair        : the ALF pair address on Robinhood Chain (from dexscreener.com, the address in the URL)
    spcxPair       : the SPCX pair used as reference (SPCX/USDG on Uniswap, Robinhood Chain)
-   spcxAtLaunch   : SPCX price in USD at the exact moment $ALF launched
+   spcxHigh       : SPCX all-time high (USD) — the finish line
+   spcxLow        : SPCX all-time low since IPO (USD) — the left edge of the gauge
+   spcxIpo        : SPCX IPO price (USD) — the little marker on the gauge
    contract       : $ALF token contract address (shown in the spec sheet)
    ========================================================= */
 var CONFIG = {
   launchISO: "2026-09-02T00:00:00-03:00",   /* PLACEHOLDER — replace with real launch time */
   alfPair: "",                              /* PLACEHOLDER — e.g. "0xabc..." */
   spcxPair: "0xc61284332117c3fb23a2a56cceffd07f7af60029",
-  spcxAtLaunch: 143.25,                     /* PLACEHOLDER — SPCX price at launch */
+  spcxHigh: 225.64,                         /* ATH, Jun 16 2026 (Nasdaq: SPCX) */
+  spcxLow: 104.83,                          /* ATL, Aug 3 2026 */
+  spcxIpo: 135,                             /* IPO price, Jun 12 2026 */
   contract: ""                              /* PLACEHOLDER — $ALF contract */
 };
 
@@ -250,22 +254,22 @@ var CONFIG = {
     ch:"MELMAC BROADCASTING",
     est:"Desde 1986 · Todavía en el sillón",
     sub:"El Melmaciano · $ALF",
-    tag:"El primer token creado para levantarle el ánimo a un multimillonario y que le construya una nave a un alienígena. Sí, ese es todo el plan.",
+    tag:"SpaceX salió a bolsa, tocó $225 y perdió la mitad. Elon está triste. Un Elon triste no construye naves. Yo necesito una nave. Así que hice un token. Sí, ese es todo el plan.",
     k_name:"Nombre",k_ticker:"Ticker",k_chain:"Cadena",k_pair:"Par",k_contract:"Contrato",k_utility:"Utilidad",
     contract:"[pegá acá la dirección del contrato]",
     utility:"Una (1) nave espacial. En algún momento.",
     m_title:"Operación \"Llevar a ALF a casa\": telemetría en vivo",
     t1_lbl:"Segundos desde el lanzamiento de $ALF",
     t1_status:"En cada uno de estos segundos, Elon tuvo la chance de sentirse un poquito mejor. Todavía no llamó.",
-    t2_lbl:"Medidor de recuperación de Elon · SPCX desde el lanzamiento de $ALF",
+    t2_lbl:"Medidor de recuperación de Elon · SPCX vs. su máximo histórico",
     netnote:"Los precios y gráficos vienen en vivo de DexScreener y se actualizan cada minuto. Si no cargan, otra vez cortaron el cable.",
     p1:"¡Hey! ¿Cómo va? Acá Gordon Shumway… pero ustedes los terrícolas me conocen como ALF. Escuchen, me dijeron que si no explicaba este token, Willie me iba a cortar el cable, y mi maratón de sitcoms de los 80 está por empezar. Así que vamos rápido.",
     h1:"La situación del token",
     p2:"Hay un token dando vueltas. Miren esa cosa grande y brillante de ahí arriba con mi cara. Sí, tiene ese logito de Robinhood Chain abajo. Muy lindo, muy reluciente. <strong>\"MELMAC\"</strong> es mi planeta natal, obvio. <strong>\"ALF4EVER\"</strong> porque soy un clásico atemporal. <strong>\"THE MELMACIAN\"</strong> es un servidor. ¿Y <strong>\"UTILITY TOKEN\"</strong>? Ah, este sí tiene una utilidad. Sigan leyendo.",
     h2:"Por qué existe este token (la historia real)",
-    p3:"Pasó lo siguiente. SpaceX aterrizó en Robinhood Chain como token, y el aterrizaje salió tan suave como el mío en el garaje de los Tanner. Subió, bajó, la gente lloró. Elon está triste. Y un Elon triste no construye naves.",
-    p4:"¿Y a mí qué me importa? Porque necesito una nave. Melmac explotó —larga historia, hay secadores de pelo involucrados— y vengo durmiendo en un sillón desde 1986. Elon es el único tipo de este planeta que fabrica cohetes con regularidad. Así que hice un trato con él. Él no lo sabe, pero lo hice.",
-    p5:"El trato: <em>$ALF existe para que Elon se sienta mejor.</em> Cada segundo que este token está vivo, SpaceX tiene un segundo más para recuperar lo que perdió. El día que SpaceX vuelva a donde estaba cuando lancé esta cosa, Elon (en mi cabeza) me debe una nave cero kilómetro. El medidor está ahí arriba. Pueden mirarlo. Yo lo miro, entre siesta y siesta.",
+    p3:"Pasó lo siguiente. El 12 de junio de 2026 SpaceX salió a bolsa. La IPO más grande de la historia de su planeta. $135 la acción. El primer día cerró en $160. Cuatro días después tocó <strong>$225,64</strong>. Champán, papelitos, Elon bailando. Después la gravedad, que yo entiendo mejor que nadie, hizo lo suyo: el 3 de agosto valía <strong>$104,83</strong>. Medio cohete, esfumado. Ese aterrizaje fue peor que el mío en el garaje de los Tanner, y yo entré al garaje <em>con la nave</em>.",
+    p4:"Ahora Elon está triste. Un Elon triste no construye naves. ¿Y a mí qué me importa? Porque necesito una nave. Melmac explotó —larga historia, hay secadores de pelo involucrados— y vengo durmiendo en un sillón desde 1986. Elon es el único tipo de este planeta que fabrica cohetes con regularidad. Así que hice un trato con él. Él no lo sabe, pero lo hice.",
+    p5:"El trato: <em>$ALF existe para que Elon se sienta mejor.</em> Cada segundo que este token está vivo, SpaceX tiene un segundo más para volver a subir. El día que SPCX vuelva a <strong>$225,64</strong>, su máximo histórico, Elon (en mi cabeza) me debe una nave cero kilómetro. El medidor está ahí arriba: muestra en vivo cuánto le falta al cohete para llegar a la cima. Pueden mirarlo. Yo lo miro, entre siesta y siesta.",
     p6:"¿Les estoy tratando de vender algo? Nah, tranquilos. Yo no vendo nada; apenas me levanto del sillón para saquear la heladera. Lo menciono porque existe, porque un tipo necesita que lo lleven a casa y porque, bueno, ya les expliqué lo del cable.",
     h3:"El plan de acción (o la falta de uno)",
     p7:"Antes de que arranquen con sus típicas preguntas corporativas aburridas, les ahorro el aire:",
@@ -286,19 +290,21 @@ var CONFIG = {
   var DYN={
     en:{
       secsub:function(d){return "That's "+d.days+" day"+(d.days===1?"":"s")+", "+d.h+" h, "+d.m+" min of Elon having time to think about it.";},
-      base:function(p){return "Reference: SPCX at launch $"+p+" (USD).";},
+      base:function(c){return "Now $"+c.now+" · needs +"+c.need+"% to reach the $"+c.high+" peak of Jun 16, 2026.";},
+      basewait:"Peak: $225.64 on Jun 16, 2026. Low: $104.83 on Aug 3, 2026.",
       offline:"Signal lost. Elon's data doesn't reach this couch right now.",
       noalf:"Chart pending. Like everything else in my life.",
       noalf_small:"It appears here as soon as the pair address is added to CONFIG.",
-      mood:[[-30,"Elon is crying in a Cybertruck. No ship this week."],[-10,"Elon is on the couch too. We're couch buddies now."],[0,"Elon is staring at the ceiling. Not crying. Not building either."],[10,"Elon is sighing less. Progress. I'm packing a bag."],[30,"Elon is doodling rockets on a napkin. Engines warming up."],[60,"I can smell Melmac from here."],[1e9,"SHIP IS HAPPENING. Willie, cancel the cable."]]
+      mood:[[-45,"Elon is crying in a Cybertruck. No ship this decade."],[-30,"Elon is on the couch too. We're couch buddies now. He eats my snacks."],[-15,"Elon is staring at the ceiling. Not crying. Not building either."],[-5,"Elon is doodling rockets on a napkin. I'm packing a bag."],[0,"Engines warming up. I can smell Melmac from here."],[1e9,"BACK AT THE TOP. SHIP IS HAPPENING. Willie, cancel the cable."]]
     },
     es:{
       secsub:function(d){return "Son "+d.days+" día"+(d.days===1?"":"s")+", "+d.h+" h y "+d.m+" min que Elon lleva teniendo tiempo para pensarlo.";},
-      base:function(p){return "Referencia: SPCX al lanzamiento, $"+p+" (USD).";},
+      base:function(c){return "Ahora $"+c.now+" · necesita +"+c.need+"% para volver al máximo de $"+c.high+" del 16 de junio de 2026.";},
+      basewait:"Máximo: $225,64 el 16 de junio de 2026. Mínimo: $104,83 el 3 de agosto de 2026.",
       offline:"Señal perdida. Los datos de Elon no llegan a este sillón ahora mismo.",
       noalf:"Gráfico pendiente. Como todo en mi vida.",
       noalf_small:"Aparece acá apenas se agregue la dirección del par en CONFIG.",
-      mood:[[-30,"Elon está llorando adentro de una Cybertruck. Esta semana no hay nave."],[-10,"Elon también está en el sillón. Ahora somos compañeros de sillón."],[0,"Elon mira el techo. No llora. Tampoco construye."],[10,"Elon suspira menos. Progreso. Yo ya armo el bolso."],[30,"Elon garabatea cohetes en una servilleta. Motores calentando."],[60,"Desde acá huelo Melmac."],[1e9,"LA NAVE VA. Willie, cancelá el cable."]]
+      mood:[[-45,"Elon está llorando adentro de una Cybertruck. Esta década no hay nave."],[-30,"Elon también está en el sillón. Ahora somos compañeros de sillón. Me come los snacks."],[-15,"Elon mira el techo. No llora. Tampoco construye."],[-5,"Elon garabatea cohetes en una servilleta. Yo ya armo el bolso."],[0,"Motores calentando. Desde acá huelo Melmac."],[1e9,"DE VUELTA EN LA CIMA. LA NAVE VA. Willie, cancelá el cable."]]
     }
   };
 
@@ -333,13 +339,16 @@ var CONFIG = {
   function fmt(p){p=Number(p); return p>=1?'$'+p.toFixed(2):'$'+p.toPrecision(3);}
   function renderPct(){
     var el=document.getElementById('pct'), sub=document.getElementById('pct_sub'), bar=document.getElementById('bar'), mood=document.getElementById('mood');
-    sub.textContent=DYN[lang].base(CONFIG.spcxAtLaunch);
-    if(spcxNow==null){ el.textContent=online===false?'—':'…'; el.className='big'; mood.textContent=online===false?DYN[lang].offline:'—'; bar.style.width='0'; return; }
-    var pct=(spcxNow/CONFIG.spcxAtLaunch-1)*100;
+    var H=CONFIG.spcxHigh, L=CONFIG.spcxLow, I=CONFIG.spcxIpo;
+    document.getElementById('g_low').textContent='$'+L.toFixed(2); document.getElementById('g_high').textContent='$'+H.toFixed(2);
+    document.getElementById('g_ipo').textContent='IPO $'+I; document.getElementById('ipo_mark').style.left=((I-L)/(H-L)*100)+'%';
+    if(spcxNow==null){ el.textContent=online===false?'—':'…'; el.className='big'; sub.textContent=DYN[lang].basewait; mood.textContent=online===false?DYN[lang].offline:'—'; bar.style.width='0'; return; }
+    var pct=(spcxNow/H-1)*100, need=((H/spcxNow-1)*100);
     el.textContent=(pct>=0?'+':'')+pct.toFixed(2)+'%';
     el.className='big '+(pct>=0?'up':'down');
-    var w=Math.min(50,Math.abs(pct)); bar.className=pct>=0?'up':'down';
-    bar.style.width=w+'%'; bar.style.left=(pct>=0?50:50-w)+'%';
+    sub.textContent=DYN[lang].base({now:spcxNow.toFixed(2),need:Math.max(0,need).toFixed(1),high:H.toFixed(2)});
+    var prog=Math.max(0,Math.min(100,(spcxNow-L)/(H-L)*100));
+    bar.className=pct>=0?'up':(prog<35?'down':''); bar.style.left='0'; bar.style.width=prog+'%';
     var list=DYN[lang].mood, txt=list[list.length-1][1];
     for(var i=0;i<list.length;i++){ if(pct<list[i][0]){txt=list[i][1];break;} }
     mood.textContent=txt;
