@@ -18,17 +18,30 @@
   *{box-sizing:border-box}
   html{color-scheme:light}
   body{
-    margin:0; background:var(--field); color:var(--ink);
+    margin:0; color:var(--ink);
     font-family:"Nunito","Segoe UI",Arial,sans-serif; font-size:17px; line-height:1.6;
-    background-image:
-      radial-gradient(circle at 50% 50%, rgba(255,255,255,.55) 0 3px, rgba(140,94,12,.25) 3.5px 4.5px, transparent 5px);
-    background-size:34px 34px;
+    background:linear-gradient(180deg,#4FA6E4 0%,#8ACBF0 45%,#CFEAF9 100%) fixed;
+    position:relative; overflow-x:hidden;
   }
+  /* ---- clouds (pure CSS, no images) ---- */
+  .sky{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:linear-gradient(180deg,#4FA6E4 0%,#8ACBF0 45%,#CFEAF9 100%)}
+  .cloud{position:absolute;width:260px;height:80px;background:#fff;border-radius:80px;opacity:.92;filter:drop-shadow(0 12px 18px rgba(30,90,140,.18));
+    animation:drift linear infinite}
+  .cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+  .cloud::before{width:120px;height:120px;left:40px;top:-60px}
+  .cloud::after{width:90px;height:90px;right:40px;top:-40px}
+  .c1{top:6%;left:-300px;animation-duration:95s;transform:scale(1.1)}
+  .c2{top:22%;left:-300px;animation-duration:140s;animation-delay:-60s;transform:scale(.75);opacity:.85}
+  .c3{top:44%;left:-300px;animation-duration:120s;animation-delay:-30s;transform:scale(1.3);opacity:.8}
+  .c4{top:63%;left:-300px;animation-duration:170s;animation-delay:-110s;transform:scale(.6);opacity:.75}
+  .c5{top:80%;left:-300px;animation-duration:130s;animation-delay:-80s;transform:scale(.95);opacity:.7}
+  .c6{top:33%;left:-300px;animation-duration:200s;animation-delay:-150s;transform:scale(.5);opacity:.6}
+  @keyframes drift{from{margin-left:0}to{margin-left:calc(100vw + 400px)}}
   .frame{max-width:1040px;margin:0 auto;padding:36px 20px 60px}
 
   /* ---- masthead ---- */
   .mast{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
-    font-family:"Courier Prime","Courier New",monospace;font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep)}
+    font-family:"Courier Prime","Courier New",monospace;font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
   .mast .ch{display:inline-flex;gap:10px;align-items:center}
   .mast .right{display:inline-flex;gap:14px;align-items:center;flex-wrap:wrap}
   .lang{display:inline-flex;border:2px solid var(--ink);border-radius:4px;overflow:hidden}
@@ -105,7 +118,7 @@
   .sig .name{font-family:"Alfa Slab One",serif;font-size:34px;color:var(--ink)}
   .sig .role{font-family:"Courier Prime",monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
 
-  footer{margin-top:44px;background:rgba(251,241,207,.85);padding:16px 20px;border-radius:6px;font-family:"Courier Prime",monospace;font-size:12.5px;line-height:1.7;color:var(--gold-deep);max-width:76ch;letter-spacing:.02em}
+  footer{margin-top:44px;background:rgba(255,248,227,.92);padding:16px 20px;border-radius:6px;font-family:"Courier Prime",monospace;font-size:12.5px;line-height:1.7;color:var(--gold-deep);max-width:76ch;letter-spacing:.02em}
   footer p{margin:0 0 .6em}
   a{color:var(--red-deep)}
   a:focus-visible,img:focus-visible{outline:3px solid var(--red);outline-offset:4px}
@@ -117,11 +130,12 @@
     .tiles,.charts{grid-template-columns:1fr}
     .chart iframe,.chart .empty{height:320px}
   }
-  @media (prefers-reduced-motion:reduce){.hero img{transition:none}.gauge b{transition:none}}
+  @media (prefers-reduced-motion:reduce){.hero img{transition:none}.gauge b{transition:none}.cloud{animation:none;left:auto}.c1{right:10%}.c2{right:60%}.c3{right:30%}.c4{right:75%}.c5{right:15%}.c6{right:45%}}
 </style>
 
 </head>
 <body>
+<div class="sky" aria-hidden="true"><div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div><div class="cloud c4"></div><div class="cloud c5"></div><div class="cloud c6"></div></div>
 <div class="frame">
   <header class="mast">
     <span class="ch"><b>CH 04</b> <span data-i18n="ch">MELMAC BROADCASTING</span></span>
