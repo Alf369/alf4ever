@@ -94,8 +94,14 @@
   .chart .head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;background:var(--ink);color:var(--gold);
     font-family:"Courier Prime",monospace;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
   .chart .head span:last-child{color:var(--cream);font-weight:400;letter-spacing:.04em;text-transform:none;font-variant-numeric:tabular-nums}
-  .chart iframe{display:block;width:100%;height:380px;border:0;background:#0f0b07}
-  .chart .empty{height:380px;display:grid;place-items:center;text-align:center;padding:24px;background:var(--paper);color:var(--ink);font-weight:700;font-size:17px;line-height:1.5}
+  .chart .plot{position:relative;height:320px;background:#0f0b07}
+  .chart canvas{display:block;width:100%;height:100%}
+  .chart .tip{position:absolute;pointer-events:none;background:rgba(28,18,8,.96);border:1px solid rgba(217,162,27,.6);color:var(--cream);
+    font-family:"Courier Prime",monospace;font-size:12px;padding:6px 8px;border-radius:4px;white-space:nowrap;display:none;transform:translate(-50%,-115%)}
+  .chart .foot{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;font-family:"Courier Prime",monospace;font-size:11.5px;letter-spacing:.06em;color:rgba(251,241,207,.6);background:var(--ink)}
+  .chart .foot a{color:var(--gold);text-decoration:none}
+  .chart .foot a:hover{text-decoration:underline}
+  .chart .empty{height:320px;display:grid;place-items:center;text-align:center;padding:24px;background:var(--paper);color:var(--ink);font-weight:700;font-size:17px;line-height:1.5}
   .chart .empty small{display:block;font-family:"Courier Prime",monospace;font-weight:400;font-size:12.5px;color:var(--gold-deep);margin-top:10px;letter-spacing:.04em}
 
   /* ---- letter ---- */
@@ -130,7 +136,7 @@
     .hero img{max-width:340px;margin:0 auto}
     .guide .row{grid-template-columns:1fr}
     .tiles,.charts{grid-template-columns:1fr}
-    .chart iframe,.chart .empty{height:320px}
+    .chart .plot,.chart .empty{height:260px}
   }
   @media (prefers-reduced-motion:reduce){.hero img{transition:none}.gauge b{transition:none}.cloud{animation:none;left:auto}.c1{right:10%}.c2{right:60%}.c3{right:30%}.c4{right:75%}.c5{right:15%}.c6{right:45%}}
 </style>
@@ -190,7 +196,7 @@
         <div id="alf_chart"></div>
       </div>
     </div>
-    <p class="netnote" id="netnote" data-i18n="netnote">Prices and charts come live from DexScreener and refresh every minute. If they don't load, the cable got cut again.</p>
+    <p class="netnote" id="netnote" data-i18n="netnote">Live price from DexScreener, refreshed every minute; daily history from GeckoTerminal. If they don't load, the cable got cut again.</p>
   </section>
 
   <article class="letter">
@@ -264,7 +270,7 @@ var CONFIG = {
     t1_lbl:"Segundos desde el lanzamiento de $ALF",
     t1_status:"En cada uno de estos segundos, Elon tuvo la chance de sentirse un poquito mejor. Todavía no llamó.",
     t2_lbl:"Medidor de recuperación de Elon · SPCX vs. su máximo histórico",
-    netnote:"Los precios y gráficos vienen en vivo de DexScreener y se actualizan cada minuto. Si no cargan, otra vez cortaron el cable.",
+    netnote:"El precio viene en vivo de DexScreener y se actualiza cada minuto; el historial diario, de GeckoTerminal. Si no cargan, otra vez cortaron el cable.",
     p1:"¡Hey! ¿Cómo va? Acá Gordon Shumway… pero ustedes los terrícolas me conocen como ALF. Escuchen, me dijeron que si no explicaba este token, Willie me iba a cortar el cable, y mi maratón de sitcoms de los 80 está por empezar. Así que vamos rápido.",
     h1:"La situación del token",
     p2:"Hay un token dando vueltas. Miren esa cosa grande y brillante de ahí arriba con mi cara. Sí, tiene ese logito de Robinhood Chain abajo. Muy lindo, muy reluciente. <strong>\"MELMAC\"</strong> es mi planeta natal, obvio. <strong>\"ALF4EVER\"</strong> porque soy un clásico atemporal. <strong>\"THE MELMACIAN\"</strong> es un servidor. ¿Y <strong>\"UTILITY TOKEN\"</strong>? Ah, este sí tiene una utilidad. Sigan leyendo.",
@@ -297,6 +303,10 @@ var CONFIG = {
       offline:"Signal lost. Elon's data doesn't reach this couch right now.",
       noalf:"Chart pending. Like everything else in my life.",
       noalf_small:"It appears here as soon as the pair address is added to CONFIG.",
+      chartfail:"Chart didn't load. Blame Willie.",
+      open:"Open on DexScreener",
+      since:function(d){return "Daily close since "+d+" on Robinhood Chain";},
+      ipo:"IPO $135",
       mood:[[-45,"Elon is crying in a Cybertruck. No ship this decade."],[-30,"Elon is on the couch too. We're couch buddies now. He eats my snacks."],[-15,"Elon is staring at the ceiling. Not crying. Not building either."],[-5,"Elon is doodling rockets on a napkin. I'm packing a bag."],[0,"Engines warming up. I can smell Melmac from here."],[1e9,"BACK AT THE TOP. SHIP IS HAPPENING. Willie, cancel the cable."]]
     },
     es:{
@@ -306,6 +316,10 @@ var CONFIG = {
       offline:"Señal perdida. Los datos de Elon no llegan a este sillón ahora mismo.",
       noalf:"Gráfico pendiente. Como todo en mi vida.",
       noalf_small:"Aparece acá apenas se agregue la dirección del par en CONFIG.",
+      chartfail:"El gráfico no cargó. Culpen a Willie.",
+      open:"Abrir en DexScreener",
+      since:function(d){return "Cierre diario desde "+d+" en Robinhood Chain";},
+      ipo:"IPO $135",
       mood:[[-45,"Elon está llorando adentro de una Cybertruck. Esta década no hay nave."],[-30,"Elon también está en el sillón. Ahora somos compañeros de sillón. Me come los snacks."],[-15,"Elon mira el techo. No llora. Tampoco construye."],[-5,"Elon garabatea cohetes en una servilleta. Yo ya armo el bolso."],[0,"Motores calentando. Desde acá huelo Melmac."],[1e9,"DE VUELTA EN LA CIMA. LA NAVE VA. Willie, cancelá el cable."]]
     }
   };
@@ -322,7 +336,7 @@ var CONFIG = {
     try{localStorage.setItem('alf-lang',l);}catch(e){}
     try{history.replaceState(null,'',l==='es'?'#es':'#en');}catch(e){}
     if(CONFIG.contract) document.getElementById('contract').textContent=CONFIG.contract;
-    tick(); renderPct(); fillEmpty();
+    tick(); renderPct(); fillEmpty(); if(typeof charts!=="undefined") redrawAll();
   }
   document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){apply(b.getAttribute('data-lang'));});});
 
@@ -366,16 +380,76 @@ var CONFIG = {
     if(CONFIG.alfPair){ fetchPair(CONFIG.alfPair).then(function(p){alfNow=p; renderPct();}).catch(function(){}); }
   }
 
-  /* ---- charts ---- */
-  function embed(id,pair){
+  /* ---- charts (own canvas, data from GeckoTerminal) ---- */
+  var charts={};
+  function embed(id,pair,ref){
     var host=document.getElementById(id);
     if(!pair){ host.innerHTML='<div class="empty"><div><span id="'+id+'_t"></span><small id="'+id+'_s"></small></div></div>'; return; }
-    var f=document.createElement('iframe');
-    f.src='https://dexscreener.com/robinhood/'+pair+'?embed=1&theme=dark&trades=0&info=0';
-    f.title=id; f.loading='lazy'; f.setAttribute('allowfullscreen',''); host.appendChild(f);
+    host.innerHTML='<div class="plot"><canvas></canvas><div class="tip"></div></div><div class="foot"><span class="since"></span><a target="_blank" rel="noopener" href="https://dexscreener.com/robinhood/'+pair+'"></a></div>';
+    charts[id]={host:host,pair:pair,ref:ref,data:null};
+    fetch('https://api.geckoterminal.com/api/v2/networks/robinhood/pools/'+pair+'/ohlcv/day?limit=100')
+      .then(function(r){return r.json();})
+      .then(function(j){
+        var rows=(j.data&&j.data.attributes&&j.data.attributes.ohlcv_list)||[];
+        rows=rows.map(function(r){return {t:r[0]*1000,c:r[4]};}).sort(function(a,b){return a.t-b.t;});
+        charts[id].data=rows; draw(id);
+      }).catch(function(){ charts[id].data=[]; draw(id); });
+    var cv=host.querySelector('canvas');
+    cv.addEventListener('mousemove',function(e){hover(id,e.offsetX,e.offsetY);});
+    cv.addEventListener('mouseleave',function(){host.querySelector('.tip').style.display='none';draw(id);});
+    window.addEventListener('resize',function(){draw(id);});
   }
+  function fmtDate(ms){ return new Date(ms).toLocaleDateString(lang==='es'?'es-UY':'en-US',{day:'numeric',month:'short'}); }
+  function layout(id){
+    var c=charts[id], cv=c.host.querySelector('canvas'), W=cv.clientWidth, H=cv.clientHeight;
+    var d=c.data||[]; if(!d.length) return null;
+    var pad={l:26,r:62,t:18,b:26}, lo=Infinity, hi=-Infinity;
+    d.forEach(function(p){ if(p.c<lo)lo=p.c; if(p.c>hi)hi=p.c; });
+    if(c.ref&&c.ref.ipo){ lo=Math.min(lo,c.ref.ipo); hi=Math.max(hi,c.ref.ipo); }
+    var span=hi-lo||1; lo-=span*.08; hi+=span*.08;
+    var x=function(i){return pad.l+(W-pad.l-pad.r)*(d.length>1?i/(d.length-1):0);};
+    var y=function(v){return pad.t+(H-pad.t-pad.b)*(1-(v-lo)/(hi-lo));};
+    return {cv:cv,W:W,H:H,pad:pad,lo:lo,hi:hi,x:x,y:y,d:d};
+  }
+  function draw(id,hi){
+    var c=charts[id], cv=c.host.querySelector('canvas'), ctx=cv.getContext('2d');
+    var dpr=window.devicePixelRatio||1; cv.width=cv.clientWidth*dpr; cv.height=cv.clientHeight*dpr; ctx.scale(dpr,dpr);
+    ctx.clearRect(0,0,cv.clientWidth,cv.clientHeight);
+    var f=c.host.querySelector('.foot'); f.querySelector('a').textContent=DYN[lang].open;
+    if(c.data===null) return;
+    if(!c.data.length){ ctx.fillStyle='#FBF1CF'; ctx.font='bold 15px Nunito, sans-serif'; ctx.textAlign='center'; ctx.fillText(DYN[lang].chartfail,cv.clientWidth/2,cv.clientHeight/2); return; }
+    var L=layout(id), d=L.d; f.querySelector('.since').textContent=DYN[lang].since(fmtDate(d[0].t));
+    ctx.font='11px "Courier Prime", monospace'; ctx.fillStyle='rgba(251,241,207,.55)'; ctx.strokeStyle='rgba(251,241,207,.10)'; ctx.lineWidth=1;
+    var ticks=4;
+    for(var i=0;i<=ticks;i++){ var v=L.lo+(L.hi-L.lo)*i/ticks, yy=Math.round(L.y(v))+.5;
+      ctx.beginPath(); ctx.moveTo(L.pad.l,yy); ctx.lineTo(L.W-L.pad.r,yy); ctx.stroke();
+      ctx.textAlign='left'; ctx.fillText('$'+(v>=1?v.toFixed(v>=100?0:2):v.toPrecision(3)),L.W-L.pad.r+8,yy+4); }
+    ctx.textAlign='center'; var step=Math.max(1,Math.ceil(d.length/6));
+    for(var k=0;k<d.length;k+=step){ ctx.fillText(fmtDate(d[k].t),L.x(k),L.H-8); }
+    if(c.ref&&c.ref.ipo){ var yi=Math.round(L.y(c.ref.ipo))+.5; ctx.setLineDash([4,4]); ctx.strokeStyle='rgba(217,162,27,.55)';
+      ctx.beginPath(); ctx.moveTo(L.pad.l,yi); ctx.lineTo(L.W-L.pad.r,yi); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle='rgba(217,162,27,.9)'; ctx.textAlign='left'; ctx.fillText(DYN[lang].ipo,L.pad.l+4,yi-4); }
+    var g=ctx.createLinearGradient(0,L.pad.t,0,L.H-L.pad.b); g.addColorStop(0,'rgba(217,162,27,.28)'); g.addColorStop(1,'rgba(217,162,27,0)');
+    ctx.beginPath(); d.forEach(function(p,i){ i?ctx.lineTo(L.x(i),L.y(p.c)):ctx.moveTo(L.x(i),L.y(p.c)); });
+    ctx.lineTo(L.x(d.length-1),L.H-L.pad.b); ctx.lineTo(L.x(0),L.H-L.pad.b); ctx.closePath(); ctx.fillStyle=g; ctx.fill();
+    ctx.beginPath(); d.forEach(function(p,i){ i?ctx.lineTo(L.x(i),L.y(p.c)):ctx.moveTo(L.x(i),L.y(p.c)); });
+    ctx.strokeStyle='#D9A21B'; ctx.lineWidth=2; ctx.lineJoin='round'; ctx.stroke();
+    var last=d[d.length-1], lx=L.x(d.length-1), ly=L.y(last.c);
+    ctx.beginPath(); ctx.arc(lx,ly,4.5,0,Math.PI*2); ctx.fillStyle='#FBF1CF'; ctx.fill(); ctx.strokeStyle='#0f0b07'; ctx.lineWidth=2; ctx.stroke();
+    if(hi!=null){ var hx=L.x(hi), hy=L.y(d[hi].c); ctx.strokeStyle='rgba(251,241,207,.35)'; ctx.lineWidth=1; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(hx+.5,L.pad.t); ctx.lineTo(hx+.5,L.H-L.pad.b); ctx.stroke(); ctx.setLineDash([]);
+      ctx.beginPath(); ctx.arc(hx,hy,4,0,Math.PI*2); ctx.fillStyle='#D9A21B'; ctx.fill(); ctx.strokeStyle='#0f0b07'; ctx.lineWidth=2; ctx.stroke(); }
+  }
+  function hover(id,mx,my){
+    var c=charts[id]; if(!c.data||!c.data.length) return; var L=layout(id), d=L.d;
+    var i=Math.round((mx-L.pad.l)/(L.W-L.pad.l-L.pad.r)*(d.length-1)); i=Math.max(0,Math.min(d.length-1,i));
+    draw(id,i); var tip=c.host.querySelector('.tip'); tip.style.display='block';
+    tip.style.left=L.x(i)+'px'; tip.style.top=L.y(d[i].c)+'px';
+    tip.textContent=fmtDate(d[i].t)+' · '+fmt(d[i].c);
+  }
+  function redrawAll(){ for(var k in charts) draw(k); }
   function fillEmpty(){ var t=document.getElementById('alf_chart_t'), s=document.getElementById('alf_chart_s'); if(t){t.textContent=DYN[lang].noalf; s.textContent=DYN[lang].noalf_small;} }
-  embed('spcx_chart',CONFIG.spcxPair); embed('alf_chart',CONFIG.alfPair);
+  embed('spcx_chart',CONFIG.spcxPair,{ipo:CONFIG.spcxIpo}); embed('alf_chart',CONFIG.alfPair,null);
 
   var start='en';
   if(location.hash==='#es') start='es';
