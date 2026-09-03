@@ -341,14 +341,14 @@
    buyUrl         : where the "Buy" button points (launchpad page of the token, or the DexScreener pair)
    ========================================================= */
 var CONFIG = {
-  launchISO: "2026-09-02T00:00:00-03:00",   /* PLACEHOLDER — replace with real launch time */
+  launchISO: "2026-09-03T00:07:07-03:00",   /* launch tx 0x94bcd2c0…67b16f, block 53088290 */
   alfPair: "",                              /* PLACEHOLDER — e.g. "0xabc..." */
   spcxPair: "0xc61284332117c3fb23a2a56cceffd07f7af60029",
   spcxHigh: 225.64,                         /* ATH, Jun 16 2026 (Nasdaq: SPCX) */
   spcxLow: 104.83,                          /* ATL, Aug 3 2026 */
   spcxIpo: 135,                             /* IPO price, Jun 12 2026 */
-  contract: "",                             /* PLACEHOLDER — $ALF contract */
-  buyUrl: ""                                /* PLACEHOLDER — link to buy (launchpad page or DexScreener pair) */
+  contract: "0x1f1a4B1586d383451A3a14f3a924Ef3b0980082c",
+  buyUrl: "https://www.ponsfamily.com/launchpad/0x1f1a4B1586d383451A3a14f3a924Ef3b0980082c"
 };
 
 (function(){
@@ -403,7 +403,7 @@ var CONFIG = {
       above:function(c){return "Now $"+c.now+" · +"+c.over+"% ABOVE the $"+c.high+" peak. New all-time-high territory. Elon, the garage door is open.";},
       offline:"Signal lost. Elon's data doesn't reach this couch right now.",
       noalf:"Chart pending. Like everything else in my life.",
-      noalf_small:"It appears here as soon as the pair address is added to CONFIG.",
+      noalf_small:"It shows up once DexScreener indexes the pair (usually when the curve graduates).",
       chartfail:"Chart didn't load. Blame Willie.",
       copied:"Copied!",
       open:"Open on DexScreener",
@@ -418,7 +418,7 @@ var CONFIG = {
       above:function(c){return "Ahora $"+c.now+" · +"+c.over+"% POR ENCIMA del máximo de $"+c.high+". Territorio de nuevo récord. Elon, la puerta del garaje está abierta.";},
       offline:"Señal perdida. Los datos de Elon no llegan a este sillón ahora mismo.",
       noalf:"Gráfico pendiente. Como todo en mi vida.",
-      noalf_small:"Aparece acá apenas se agregue la dirección del par en CONFIG.",
+      noalf_small:"Aparece cuando DexScreener indexe el par (normalmente al graduar la curva).",
       chartfail:"El gráfico no cargó. Culpen a Willie.",
       copied:"¡Copiado!",
       open:"Abrir en DexScreener",
