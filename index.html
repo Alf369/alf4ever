@@ -114,6 +114,26 @@
   .specs dt{color:var(--gold);text-transform:uppercase;margin:0}
   .specs dd{margin:0;font-weight:700;word-break:break-all}
   .specs .lime{color:var(--lime)}
+  .specs .addr{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .specs .addr code{font:inherit;word-break:break-all}
+  .specs .mini{font:inherit;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--gold);color:var(--gold);background:transparent;border-radius:3px;padding:2px 8px;cursor:pointer;text-decoration:none;line-height:1.5}
+  .specs .mini:hover,.specs .mini:focus-visible{background:var(--gold);color:var(--ink);outline:none}
+  .specs .mini.ok{background:var(--up);border-color:var(--up);color:var(--ink)}
+  /* ---- how to buy ---- */
+  .buy{margin-top:26px;border:3px solid var(--ink);border-radius:8px;background:var(--cream);overflow:hidden}
+  .buy .bh{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 18px;background:var(--ink);color:var(--gold);font-family:"Courier Prime",monospace;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+  .buy .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .buy .step{padding:16px 18px 18px;border-left:2px dashed var(--gold-deep)}
+  .buy .step:first-child{border-left:0}
+  .buy .step b{display:block;font-family:"Alfa Slab One",serif;font-weight:400;font-size:26px;color:var(--red);line-height:1;margin-bottom:8px}
+  .buy .step p{margin:0;font-size:15px;line-height:1.5;color:var(--ink)}
+  .buy .step a{color:var(--red-deep);font-weight:700}
+  .buybtn{font:inherit;font-family:"Courier Prime",monospace;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;background:var(--red);color:#fff;border:0;border-radius:4px;padding:8px 14px;text-decoration:none;display:inline-block}
+  .buybtn:hover{background:var(--red-deep)} .buybtn[aria-disabled="true"]{background:#6b5a3a;color:rgba(251,241,207,.7);cursor:not-allowed}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2px dashed rgba(217,162,27,.35)}
+  .stats div{padding:8px 12px;font-family:"Courier Prime",monospace;font-size:11.5px;letter-spacing:.06em;color:rgba(251,241,207,.6);background:var(--ink)}
+  .stats div b{display:block;font-size:14px;color:var(--cream);font-variant-numeric:tabular-nums;letter-spacing:0}
+  .stats .b{color:var(--up)} .stats .s{color:var(--down)}
 
   /* ---- mission control ---- */
   .mission{margin-top:52px;background:var(--ink);color:var(--cream);border-radius:10px;padding:26px clamp(18px,4vw,40px) 30px;box-shadow:var(--shadow);position:relative}
@@ -184,6 +204,8 @@
     .hero img{max-width:340px;margin:0 auto}
     .guide .row{grid-template-columns:1fr}
     .tiles,.charts{grid-template-columns:1fr}
+    .buy .steps{grid-template-columns:1fr} .buy .step{border-left:0;border-top:2px dashed var(--gold-deep)} .buy .step:first-child{border-top:0}
+    .stats{grid-template-columns:1fr 1fr}
     .chart .plot,.chart .empty{height:260px}
   }
   @media (prefers-reduced-motion:reduce){.hero img{transition:none}.gauge b{transition:none;animation:none}.rocket,.rocket svg,.rocket .flame,.rocket .smoke,.stars::after{animation:none!important}html[data-mode="night"] .rocket{bottom:20%;left:80%}.cloud{animation:none;left:auto}.c1{right:10%}.c2{right:60%}.c3{right:30%}.c4{right:75%}.c5{right:15%}.c6{right:45%}}
@@ -217,7 +239,7 @@
         <dt data-i18n="k_ticker">Ticker</dt><dd>ALF</dd>
         <dt data-i18n="k_chain">Chain</dt><dd class="lime">Robinhood Chain</dd>
         <dt data-i18n="k_pair">Pair</dt><dd>ALF / SPCX</dd>
-        <dt data-i18n="k_contract">Contract</dt><dd id="contract" data-i18n="contract">[paste contract address here]</dd>
+        <dt data-i18n="k_contract">Contract</dt><dd id="contract"><span class="addr"><code id="c_addr" data-i18n="contract">[paste contract address here]</code><button type="button" class="mini" id="c_copy" hidden data-i18n="copy">Copy</button><a class="mini" id="c_exp" hidden target="_blank" rel="noopener" data-i18n="explorer">Explorer</a><a class="mini" id="c_dex" hidden target="_blank" rel="noopener">DexScreener</a></span></dd>
         <dt data-i18n="k_utility">Utility</dt><dd data-i18n="utility">One (1) spaceship. Eventually.</dd>
       </dl>
     </div>
@@ -250,6 +272,20 @@
       <div class="chart">
         <div class="head"><span>ALF · ALF4EVER</span><span id="alf_price">—</span></div>
         <div id="alf_chart"></div>
+      </div>
+    </div>
+    <div class="buy">
+      <div class="bh"><span data-i18n="buy_t">Pre-couch checklist · how to get $ALF</span><a class="buybtn" id="buybtn" target="_blank" rel="noopener" aria-disabled="true" data-i18n="buy_btn">Buy $ALF</a></div>
+      <div class="steps">
+        <div class="step"><b>1</b><p data-i18n="s1">Get some <strong>SPCX</strong> on Robinhood Chain. Yes, you buy a piece of Elon's rocket first. That's the joke and also the rule.</p></div>
+        <div class="step"><b>2</b><p data-i18n="s2">Swap SPCX for <strong>$ALF</strong> using the button up there. Check that the contract matches the one on this page: clones exist, and they have no couch.</p></div>
+        <div class="step"><b>3</b><p data-i18n="s3">Return to the couch. Watch the meter. Every $ALF bought locks a tiny bit of SpaceX in my pool. Elon feels it. Probably.</p></div>
+      </div>
+      <div class="stats" id="stats" hidden>
+        <div><span data-i18n="st_b">Buys 24h</span><b class="b" id="st_b">—</b></div>
+        <div><span data-i18n="st_s">Sells 24h</span><b class="s" id="st_s">—</b></div>
+        <div><span data-i18n="st_v">Volume 24h</span><b id="st_v">—</b></div>
+        <div><span data-i18n="st_l">Liquidity</span><b id="st_l">—</b></div>
       </div>
     </div>
     <p class="netnote" id="netnote" data-i18n="netnote">Live price from DexScreener, refreshed every minute; daily history from GeckoTerminal. If they don't load, the cable got cut again.</p>
@@ -302,6 +338,7 @@
    spcxLow        : SPCX all-time low since IPO (USD) — the left edge of the gauge
    spcxIpo        : SPCX IPO price (USD) — the little marker on the gauge
    contract       : $ALF token contract address (shown in the spec sheet)
+   buyUrl         : where the "Buy" button points (launchpad page of the token, or the DexScreener pair)
    ========================================================= */
 var CONFIG = {
   launchISO: "2026-09-02T00:00:00-03:00",   /* PLACEHOLDER — replace with real launch time */
@@ -310,7 +347,8 @@ var CONFIG = {
   spcxHigh: 225.64,                         /* ATH, Jun 16 2026 (Nasdaq: SPCX) */
   spcxLow: 104.83,                          /* ATL, Aug 3 2026 */
   spcxIpo: 135,                             /* IPO price, Jun 12 2026 */
-  contract: ""                              /* PLACEHOLDER — $ALF contract */
+  contract: "",                             /* PLACEHOLDER — $ALF contract */
+  buyUrl: ""                                /* PLACEHOLDER — link to buy (launchpad page or DexScreener pair) */
 };
 
 (function(){
@@ -321,6 +359,12 @@ var CONFIG = {
     tag:"SpaceX salió a bolsa, tocó $225 y perdió la mitad. Elon está triste. Un Elon triste no construye naves. Yo necesito una nave. Así que hice un token. Sí, ese es todo el plan.",
     k_name:"Nombre",k_ticker:"Ticker",k_chain:"Cadena",k_pair:"Par",k_contract:"Contrato",k_utility:"Utilidad",
     contract:"[pegá acá la dirección del contrato]",
+    copy:"Copiar",explorer:"Explorador",
+    buy_t:"Checklist pre-sillón · cómo conseguir $ALF",buy_btn:"Comprar $ALF",
+    s1:"Conseguí <strong>SPCX</strong> en Robinhood Chain. Sí, primero comprás un pedacito del cohete de Elon. Ese es el chiste y también la regla.",
+    s2:"Cambiá SPCX por <strong>$ALF</strong> con el botón de arriba. Verificá que el contrato sea el de esta página: existen clones, y no tienen sillón.",
+    s3:"Volvé al sillón. Mirá el medidor. Cada $ALF comprado encierra un poquito de SpaceX en mi pool. Elon lo siente. Probablemente.",
+    st_b:"Compras 24h",st_s:"Ventas 24h",st_v:"Volumen 24h",st_l:"Liquidez",
     utility:"Una (1) nave espacial. En algún momento.",
     m_title:"Operación \"Llevar a ALF a casa\": telemetría en vivo",
     t1_lbl:"Segundos desde el lanzamiento de $ALF",
@@ -361,6 +405,7 @@ var CONFIG = {
       noalf:"Chart pending. Like everything else in my life.",
       noalf_small:"It appears here as soon as the pair address is added to CONFIG.",
       chartfail:"Chart didn't load. Blame Willie.",
+      copied:"Copied!",
       open:"Open on DexScreener",
       since:function(d){return "Daily close since "+d+" on Robinhood Chain";},
       ipo:"IPO $135",
@@ -375,6 +420,7 @@ var CONFIG = {
       noalf:"Gráfico pendiente. Como todo en mi vida.",
       noalf_small:"Aparece acá apenas se agregue la dirección del par en CONFIG.",
       chartfail:"El gráfico no cargó. Culpen a Willie.",
+      copied:"¡Copiado!",
       open:"Abrir en DexScreener",
       since:function(d){return "Cierre diario desde "+d+" en Robinhood Chain";},
       ipo:"IPO $135",
@@ -393,10 +439,22 @@ var CONFIG = {
     document.querySelectorAll('.lang button').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-lang')===l));});
     try{localStorage.setItem('alf-lang',l);}catch(e){}
     try{history.replaceState(null,'',l==='es'?'#es':'#en');}catch(e){}
-    if(CONFIG.contract) document.getElementById('contract').textContent=CONFIG.contract;
+    wireContract();
     tick(); renderPct(); fillEmpty(); if(typeof charts!=="undefined") redrawAll();
   }
   document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){apply(b.getAttribute('data-lang'));});});
+  function wireContract(){
+    var a=document.getElementById('c_addr'), cp=document.getElementById('c_copy'), ex=document.getElementById('c_exp'), dx=document.getElementById('c_dex'), bb=document.getElementById('buybtn');
+    if(CONFIG.contract){ a.textContent=CONFIG.contract; cp.hidden=false; ex.hidden=false; ex.href='https://robinhoodchain.blockscout.com/token/'+CONFIG.contract; }
+    if(CONFIG.alfPair){ dx.hidden=false; dx.href='https://dexscreener.com/robinhood/'+CONFIG.alfPair; }
+    var u=CONFIG.buyUrl||(CONFIG.alfPair?'https://dexscreener.com/robinhood/'+CONFIG.alfPair:'');
+    if(u){ bb.href=u; bb.removeAttribute('aria-disabled'); } else { bb.removeAttribute('href'); bb.setAttribute('aria-disabled','true'); }
+  }
+  document.getElementById('c_copy').addEventListener('click',function(){
+    var b=this, txt=CONFIG.contract; function done(){ b.textContent=DYN[lang].copied; b.classList.add('ok'); setTimeout(function(){ b.textContent=(lang==='es'?ES:EN).copy; b.classList.remove('ok'); },1600); }
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done); }
+    else { var r=document.createRange(); r.selectNodeContents(document.getElementById('c_addr')); var s=getSelection(); s.removeAllRanges(); s.addRange(r); try{document.execCommand('copy');}catch(e){} done(); }
+  });
 
   /* ---- counter ---- */
   var launch=new Date(CONFIG.launchISO).getTime();
@@ -432,11 +490,17 @@ var CONFIG = {
   }
   function fetchPair(pair){
     return fetch('https://api.dexscreener.com/latest/dex/pairs/robinhood/'+pair).then(function(r){return r.json();})
-      .then(function(j){var p=j&&j.pairs&&j.pairs[0]; return p?Number(p.priceUsd):null;});
+      .then(function(j){var p=j&&j.pairs&&j.pairs[0]; return p||null;});
   }
   function refresh(){
-    fetchPair(CONFIG.spcxPair).then(function(p){spcxNow=p; online=p!=null; renderPct();}).catch(function(){online=false; renderPct();});
-    if(CONFIG.alfPair){ fetchPair(CONFIG.alfPair).then(function(p){alfNow=p; renderPct();}).catch(function(){}); }
+    fetchPair(CONFIG.spcxPair).then(function(p){spcxNow=p?Number(p.priceUsd):null; online=spcxNow!=null; renderPct();}).catch(function(){online=false; renderPct();});
+    if(CONFIG.alfPair){ fetchPair(CONFIG.alfPair).then(function(p){ if(!p) return; alfNow=Number(p.priceUsd); renderPct(); showStats(p); }).catch(function(){}); }
+  }
+  function kfmt(n){ n=Number(n)||0; return n>=1e6?'$'+(n/1e6).toFixed(2)+'M':n>=1e3?'$'+(n/1e3).toFixed(1)+'K':'$'+n.toFixed(0); }
+  function showStats(p){
+    var s=document.getElementById('stats'); s.hidden=false;
+    var tx=(p.txns&&p.txns.h24)||{}; document.getElementById('st_b').textContent=(tx.buys||0).toLocaleString(); document.getElementById('st_s').textContent=(tx.sells||0).toLocaleString();
+    document.getElementById('st_v').textContent=kfmt(p.volume&&p.volume.h24); document.getElementById('st_l').textContent=kfmt(p.liquidity&&p.liquidity.usd);
   }
 
   /* ---- charts (own canvas, data from GeckoTerminal) ---- */
