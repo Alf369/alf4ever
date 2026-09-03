@@ -39,6 +39,53 @@
   .c5{top:80%;left:-300px;animation-duration:130s;animation-delay:-80s;transform:scale(.95);opacity:.7}
   .c6{top:33%;left:-300px;animation-duration:200s;animation-delay:-150s;transform:scale(.5);opacity:.6}
   @keyframes drift{from{margin-left:0}to{margin-left:calc(100vw + 400px)}}
+  /* ---- night mode ---- */
+  .sky{transition:background 1s}
+  html[data-mode="night"] .sky{background:linear-gradient(180deg,#050A1F 0%,#0B1A45 55%,#1B2A5E 100%)}
+  html[data-mode="night"] .cloud{opacity:.10;filter:none}
+  .stars{position:absolute;inset:0;opacity:0;transition:opacity 1.2s;
+    background-image:
+      radial-gradient(1.5px 1.5px at 8% 12%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 22% 40%,#fff 50%,transparent 60%),
+      radial-gradient(2px 2px at 35% 18%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 48% 62%,#fff 50%,transparent 60%),
+      radial-gradient(1.5px 1.5px at 60% 8%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 72% 33%,#fff 50%,transparent 60%),
+      radial-gradient(2px 2px at 85% 20%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 92% 55%,#fff 50%,transparent 60%),
+      radial-gradient(1.5px 1.5px at 15% 78%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 40% 88%,#fff 50%,transparent 60%),
+      radial-gradient(1px 1px at 66% 74%,#fff 50%,transparent 60%),radial-gradient(1.5px 1.5px at 80% 90%,#fff 50%,transparent 60%),
+      radial-gradient(1px 1px at 5% 50%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 55% 45%,#fff 50%,transparent 60%),
+      radial-gradient(1px 1px at 30% 60%,#fff 50%,transparent 60%),radial-gradient(1.5px 1.5px at 95% 5%,#fff 50%,transparent 60%)}
+  .stars::after{content:"";position:absolute;inset:0;background-image:
+      radial-gradient(1px 1px at 12% 30%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 27% 8%,#fff 50%,transparent 60%),
+      radial-gradient(1px 1px at 44% 35%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 58% 82%,#fff 50%,transparent 60%),
+      radial-gradient(1px 1px at 76% 60%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 88% 38%,#fff 50%,transparent 60%),
+      radial-gradient(1px 1px at 20% 95%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 50% 15%,#fff 50%,transparent 60%);
+    animation:twinkle 3.2s ease-in-out infinite}
+  @keyframes twinkle{0%,100%{opacity:.25}50%{opacity:1}}
+  html[data-mode="night"] .stars{opacity:1}
+  .moon{position:absolute;top:14%;right:3%;width:74px;height:74px;border-radius:50%;background:#F4EED6;
+    box-shadow:0 0 40px 10px rgba(244,238,214,.25);opacity:0;transition:opacity 1.2s}
+  .moon::before{content:"";position:absolute;left:14px;top:18px;width:14px;height:14px;border-radius:50%;background:rgba(0,0,0,.08);box-shadow:26px 18px 0 -2px rgba(0,0,0,.08),10px 34px 0 -5px rgba(0,0,0,.08)}
+  html[data-mode="night"] .moon{opacity:1}
+  .rocket{position:absolute;left:12%;bottom:-160px;width:54px;height:120px;opacity:0;transition:opacity .8s}
+  html[data-mode="night"] .rocket{opacity:1;animation:launch 22s linear infinite}
+  .rocket svg{width:100%;height:100%;display:block;animation:sway 2.4s ease-in-out infinite}
+  .rocket .flame{transform-origin:27px 96px;animation:flame .12s linear infinite alternate}
+  .rocket .smoke{position:absolute;left:19px;top:112px;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.35);
+    animation:smoke 1.4s ease-out infinite}
+  .rocket .smoke.s2{animation-delay:.45s;left:14px} .rocket .smoke.s3{animation-delay:.9s;left:24px}
+  @keyframes launch{0%{transform:translate(0,0)}100%{transform:translate(38vw,-130vh)}}
+  @keyframes sway{0%,100%{transform:rotate(26deg)}50%{transform:rotate(30deg)}}
+  @keyframes flame{from{transform:scaleY(1)}to{transform:scaleY(1.35)}}
+  @keyframes smoke{0%{transform:translate(0,0) scale(.6);opacity:.55}100%{transform:translate(-30px,60px) scale(2.2);opacity:0}}
+  html[data-mode="night"] .mast{color:var(--cream)}
+  html[data-mode="night"] .lang button{background:#1B2A5E;color:var(--cream)}
+  html[data-mode="night"] .lang button[aria-pressed="true"]{background:var(--cream);color:#0B1A45}
+  html[data-mode="night"] .mast .ch b{background:var(--cream);color:#0B1A45}
+  html[data-mode="night"] h1 small{color:var(--cream)}
+  html[data-mode="night"] .tag{color:var(--cream)}
+  html[data-mode="night"] footer{background:rgba(11,26,69,.85);color:rgba(251,241,207,.75)}
+  .mode{font:inherit;letter-spacing:.12em;border:2px solid var(--ink);border-radius:4px;background:var(--cream);color:var(--ink);padding:3px 10px;cursor:pointer;line-height:1.3}
+  html[data-mode="night"] .mode{border-color:var(--cream);background:#1B2A5E;color:var(--cream)}
+  .mode:focus-visible{outline:3px solid var(--red);outline-offset:2px}
   .frame{max-width:1040px;margin:0 auto;padding:36px 20px 60px}
 
   /* ---- masthead ---- */
@@ -139,17 +186,25 @@
     .tiles,.charts{grid-template-columns:1fr}
     .chart .plot,.chart .empty{height:260px}
   }
-  @media (prefers-reduced-motion:reduce){.hero img{transition:none}.gauge b{transition:none;animation:none}.cloud{animation:none;left:auto}.c1{right:10%}.c2{right:60%}.c3{right:30%}.c4{right:75%}.c5{right:15%}.c6{right:45%}}
+  @media (prefers-reduced-motion:reduce){.hero img{transition:none}.gauge b{transition:none;animation:none}.rocket,.rocket svg,.rocket .flame,.rocket .smoke,.stars::after{animation:none!important}html[data-mode="night"] .rocket{bottom:20%;left:80%}.cloud{animation:none;left:auto}.c1{right:10%}.c2{right:60%}.c3{right:30%}.c4{right:75%}.c5{right:15%}.c6{right:45%}}
 </style>
 
 </head>
 <body>
-<div class="sky" aria-hidden="true"><div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div><div class="cloud c4"></div><div class="cloud c5"></div><div class="cloud c6"></div></div>
+<div class="sky" aria-hidden="true"><div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div><div class="cloud c4"></div><div class="cloud c5"></div><div class="cloud c6"></div><div class="stars"></div><div class="moon"></div>
+  <div class="rocket" aria-hidden="true"><svg viewBox="0 0 54 120"><g class="flame"><path d="M27 96 L18 118 Q27 108 36 118 Z" fill="#FF8A2A"/><path d="M27 98 L22 112 Q27 106 32 112 Z" fill="#FFE07A"/></g>
+    <path d="M27 4 C40 22 42 60 40 90 L14 90 C12 60 14 22 27 4 Z" fill="#F4EED6" stroke="#1C1208" stroke-width="2"/>
+    <path d="M27 4 C33 14 36 26 37 40 L17 40 C18 26 21 14 27 4 Z" fill="#B8131D"/>
+    <circle cx="27" cy="52" r="7" fill="#4FA6E4" stroke="#1C1208" stroke-width="2"/>
+    <path d="M14 72 L2 96 L14 92 Z" fill="#B8131D" stroke="#1C1208" stroke-width="2"/><path d="M40 72 L52 96 L40 92 Z" fill="#B8131D" stroke="#1C1208" stroke-width="2"/>
+    <rect x="19" y="90" width="16" height="8" rx="2" fill="#8C5E0C" stroke="#1C1208" stroke-width="2"/>
+    <text x="27" y="82" text-anchor="middle" font-family="Courier Prime, monospace" font-weight="700" font-size="9" fill="#1C1208">ALF</text></svg>
+    <span class="smoke"></span><span class="smoke s2"></span><span class="smoke s3"></span></div></div>
 <div class="frame">
   <header class="mast">
     <span class="ch"><b>CH 04</b> <span data-i18n="ch">MELMAC BROADCASTING</span></span>
     <span class="right"><span data-i18n="est">Est. 1986 · Still on the couch</span>
-      <span class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button></span></span>
+      <button type="button" class="mode" id="mode" aria-pressed="false" title="Night mode">☾</button> <span class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button></span></span>
   </header>
 
   <section class="hero">
@@ -454,6 +509,14 @@ var CONFIG = {
   function redrawAll(){ for(var k in charts) draw(k); }
   function fillEmpty(){ var t=document.getElementById('alf_chart_t'), s=document.getElementById('alf_chart_s'); if(t){t.textContent=DYN[lang].noalf; s.textContent=DYN[lang].noalf_small;} }
   embed('spcx_chart',CONFIG.spcxPair,{ipo:CONFIG.spcxIpo}); embed('alf_chart',CONFIG.alfPair,null);
+
+  /* ---- night mode ---- */
+  var modeBtn=document.getElementById('mode');
+  function setMode(m){ document.documentElement.setAttribute('data-mode',m); modeBtn.setAttribute('aria-pressed',String(m==='night')); modeBtn.textContent=m==='night'?'☀':'☾';
+    modeBtn.title=m==='night'?(lang==='es'?'Modo día':'Day mode'):(lang==='es'?'Modo noche':'Night mode'); try{localStorage.setItem('alf-mode',m);}catch(e){} }
+  modeBtn.addEventListener('click',function(){ setMode(document.documentElement.getAttribute('data-mode')==='night'?'day':'night'); });
+  var m0='day'; try{ var sm=localStorage.getItem('alf-mode'); if(sm==='night'||sm==='day') m0=sm; else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches) m0='night'; }catch(e){}
+  setMode(m0);
 
   var start='en';
   if(location.hash==='#es') start='es';
